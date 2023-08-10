@@ -19,10 +19,11 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Distribution Center</th>
                     <th>Latitude</th>
                     <th>Longitude</th>
                     <th>Items</th>
+                    <th>Brand</th>
                     <th>Quantity</th>
                 </tr>
                 </thead>
@@ -37,6 +38,12 @@
                     <td>
                         <th:block th:each="item: ${center.items}">
                             <span th:text="${item.name}"></span>
+
+                            <br/>
+                    </td>
+                    <td>
+                        <th:block th:each="item: ${center.items}">
+                            <span th:text="${item.brandFrom}"></span>
                             <br/>
                     </td>
                     <td>
@@ -54,6 +61,35 @@
             <button class="btn btn-danger btn-sm" type="submit">Delete All Items</button>
         </form>
     </div>
+<br>
+    <hr>
+    <br>
+    <div>
+        <form th:action="@{/admin/search}" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="brand" class="form-label">Brand:</label>
+                <select class="form-select" id="brand" name="brand" required>
+                    <option th:each="brand: ${brands}" th:value="${brand.name()}" th:text="${brand.title}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+    <div th:if="${searchName != null && searchBrand != null}">
+        <h4>Search Results:</h4>
+        <p><strong>Search Name:</strong> <span th:text="${searchName}"></span></p>
+        <p><strong>Search Brand:</strong> <span th:text="${searchBrand}"></span></p>
+        <p><a href="#" th:href="@{/admin}">Clear Search</a></p>
+    </div>
+
+
+
 </div>
 </body>
 </html>
