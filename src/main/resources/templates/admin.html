@@ -86,6 +86,7 @@
         <h4>Search Results:</h4>
         <p><strong>Search Name:</strong> <span th:text="${searchName}"></span></p>
         <p><strong>Search Brand:</strong> <span th:text="${searchBrand}"></span></p>
+        <p><strong>Closest Distribution Center with Search Item: </strong><span th:text="${closestCenterWithItem.name}"></span></p>
         <p><a href="#" th:href="@{/admin}">Clear Search</a></p>
     </div>
 

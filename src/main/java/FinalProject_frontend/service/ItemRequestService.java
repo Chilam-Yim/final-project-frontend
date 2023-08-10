@@ -1,40 +1,13 @@
 package FinalProject_frontend.service;
 
-import FinalProject_frontend.model.DistributionCenter;
-import FinalProject_frontend.model.Item;
-import FinalProject_frontend.model.WareHouse;
 import FinalProject_frontend.model.dto.DistributionCenterDto;
-import FinalProject_frontend.repository.DistributionCenterRepository;
-import FinalProject_frontend.repository.WareHouseRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
-@CrossOrigin(origins = "http://localhost:8081")
 public class ItemRequestService {
 
-    private RestTemplate restTemplate;
-    private WareHouseRepository wareHouseRepository;
-    private DistributionCenterRepository distributionCenterRepository;
-
-
-//    public ItemRequestService(WareHouseRepository wareHouseRepository, DistributionCenterRepository distributionCenterRepository) {
-//        this.wareHouseRepository = wareHouseRepository;
-//        this.distributionCenterRepository = distributionCenterRepository;
-//    }
-//
-//    public DistributionCenterDto requestItem(@PathVariable long id, String brand, String name, int quantity) {
-//        var centers = Arrays.asList(restTemplate.getForObject("http://localhost:8081/api/center", DistributionCenterDto[].class));
-//        WareHouse wareHouse = wareHouseRepository.findById(id).get();
-//        DistributionCenterDto closestCenter = findClosestDistributionCenter(centers, wareHouse.getLatitude(), wareHouse.getLongitude());
-//        return closestCenter;
-//    }
-//
 
     public DistributionCenterDto findClosestDistributionCenter(List<DistributionCenterDto> centers, double targetLatitude, double targetLongitude) {
         DistributionCenterDto closestCenter = null;

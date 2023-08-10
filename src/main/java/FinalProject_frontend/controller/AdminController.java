@@ -8,6 +8,8 @@ import java.util.List;
 import FinalProject_frontend.model.Item;
 import FinalProject_frontend.model.dto.DistributionCenterDto;
 
+import FinalProject_frontend.repository.WareHouseRepository;
+import FinalProject_frontend.service.ItemRequestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +26,15 @@ public class AdminController {
 
     private RestTemplate restTemplate;
 
-    public AdminController(RestTemplate restTemplate) {
+    private WareHouseRepository warehouseRepository;
+    private ItemRequestService itemRequestService;
+
+    public AdminController(RestTemplate restTemplate,
+                           WareHouseRepository warehouseRepository,
+                           ItemRequestService itemRequestService) {
         this.restTemplate = restTemplate;
+        this.warehouseRepository = warehouseRepository;
+        this.itemRequestService = itemRequestService;
     }
 
     @GetMapping
@@ -60,17 +69,15 @@ public class AdminController {
                     .noneMatch(item -> item.getName().equalsIgnoreCase(name) && item.getBrandFrom() == Item.Brand.valueOf(brandUpperCase)));
         }
 
+        var warehouse = warehouseRepository.findById(1L);
+        var closestCenterWithItem = itemRequestService.findClosestDistributionCenter(filteredCenters, warehouse.get().getLatitude(), warehouse.get().getLongitude());
+
         model.addAttribute("centers", filteredCenters);
         model.addAttribute("brands", EnumSet.allOf(Item.Brand.class));
         model.addAttribute("searchName", name);
         model.addAttribute("searchBrand", brand);
+        model.addAttribute("closestCenterWithItem", closestCenterWithItem);
 
         return "admin";
     }
-
-
-
-
-
-
 }
