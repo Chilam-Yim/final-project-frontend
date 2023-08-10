@@ -25,6 +25,7 @@
                 <p class="card-subtitle mb-2" th:text="|Year of Creation: ${item.createYear}|"/>
                 <p class="card-subtitle mb-2" th:text="|Price: ${item.price}|"/>
                 <p class="card-text" th:text="|Brand: ${item.brandFrom}|"></p>
+                <p class="card-text" th:text="|Quantity: ${item.quantity}|"></p>
 
                 <form th:action="@{/items/delete/{itemId}(itemId=${item.id})}" method="post">
                     <button class="btn btn-danger btn-sm mt-2" type="submit">Delete</button>

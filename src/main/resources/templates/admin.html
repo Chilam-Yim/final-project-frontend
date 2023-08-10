@@ -24,12 +24,13 @@
                     <th>Longitude</th>
                     <th>Items</th>
                     <th>Brand</th>
+                    <th>Price</th>
                     <th>Quantity</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:if="${centers.isEmpty()}">
-                    <td colspan="5">No item found</td>
+                    <td colspan="7">No item found</td>
                 </tr>
                 <tr th:each="center: ${centers}">
                     <td><span th:text="${center.name}"></span></td>
@@ -48,6 +49,11 @@
                     </td>
                     <td>
                         <th:block th:each="item: ${center.items}">
+                            <span th:text="'$'+${item.price}"></span>
+                            <br/>
+                    </td>
+                    <td>
+                        <th:block th:each="item: ${center.items}">
                             <span th:text="${item.quantity}"></span>
                             <br/>
                     </td>
@@ -55,11 +61,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div>
-        <form th:action="@{/admin/deleteall}" method="post">
-            <button class="btn btn-danger btn-sm" type="submit">Delete All Items</button>
-        </form>
     </div>
 <br>
     <hr>

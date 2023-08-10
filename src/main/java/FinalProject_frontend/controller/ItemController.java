@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("/items")
+@CrossOrigin(origins = "http://localhost:8081")
 public class ItemController {
 
     // define the items show in one page
@@ -89,4 +90,5 @@ public class ItemController {
         model.addAttribute("currentPage", itemPage.getNumber());
         return "items";
     }
+
 }

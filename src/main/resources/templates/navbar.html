@@ -21,6 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" href="/items">Item List</a>
+                <a class="nav-link" href="/admin">Admin</a>
                 <form id="logoutForm" th:action="@{/logout}" method="post">
                     <!-- CSRF Token (if required by Spring Security) -->
                     <input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />
