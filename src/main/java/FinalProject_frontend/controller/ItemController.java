@@ -4,7 +4,7 @@ import java.util.EnumSet;
 import java.util.Optional;
 
 import FinalProject_frontend.model.Item.Brand;
-import FinalProject_frontend.model.UserDetail;
+import FinalProject_frontend.model.AppUser;
 import FinalProject_frontend.model.dto.ItemsSearch;
 import FinalProject_frontend.repository.ItemRepository;
 import FinalProject_frontend.repository.ItemRepositoryPaginated;
@@ -62,7 +62,7 @@ public class ItemController {
 
     @PostMapping("/delete/{itemId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String deleteItem(@AuthenticationPrincipal UserDetail user, @PathVariable Long itemId) {
+    public String deleteItem(@AuthenticationPrincipal AppUser user, @PathVariable Long itemId) {
         log.info("User {} is deleting item {}", user.getAuthorities(), itemId);
         // Delete the item from the repository
         itemRepository.deleteById(itemId);

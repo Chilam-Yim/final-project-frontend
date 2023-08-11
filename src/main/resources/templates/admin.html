@@ -37,23 +37,23 @@
                     <td><span th:text="${center.latitude}"></span></td>
                     <td><span th:text="${center.longitude}"></span></td>
                     <td>
-                        <th:block th:each="item: ${center.items}">
+                        <th:block th:each="item: ${center.getItems}">
                             <span th:text="${item.name}"></span>
 
                             <br/>
                     </td>
                     <td>
-                        <th:block th:each="item: ${center.items}">
+                        <th:block th:each="item: ${center.getItems}">
                             <span th:text="${item.brandFrom}"></span>
                             <br/>
                     </td>
                     <td>
-                        <th:block th:each="item: ${center.items}">
+                        <th:block th:each="item: ${center.getItems}">
                             <span th:text="'$'+${item.price}"></span>
                             <br/>
                     </td>
                     <td>
-                        <th:block th:each="item: ${center.items}">
+                        <th:block th:each="item: ${center.getItems}">
                             <span th:text="${item.quantity}"></span>
                             <br/>
                     </td>

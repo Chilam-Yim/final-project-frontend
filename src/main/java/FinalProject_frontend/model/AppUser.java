@@ -1,13 +1,10 @@
 package FinalProject_frontend.model;
 
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,12 +16,15 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
-@Entity(name = "users")
+@Entity
+@Table(name = "app_users")
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-public class UserDetail implements UserDetails {
+public class AppUser implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "APPUSER")
+    @SequenceGenerator(name = "APPUSER",  sequenceName = "\"Appuser_pkey\"")
+    @Column(name = "id", nullable = false)
     private Long id;
 
     private String username;

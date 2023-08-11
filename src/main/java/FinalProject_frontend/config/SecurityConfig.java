@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import FinalProject_frontend.model.UserDetail;
+import FinalProject_frontend.model.AppUser;
 import FinalProject_frontend.repository.UserRepository;
 
 @Configuration
@@ -26,7 +26,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return username -> {
-            UserDetail user = userRepository.findByUsername(username);
+            AppUser user = userRepository.findByUsername(username);
             if (user != null) {
                 return user;
             }
@@ -43,7 +43,7 @@ public class SecurityConfig {
                     .requestMatchers("/home").hasAnyRole("USER","ADMIN","EMPLOYEE")
                     .requestMatchers("/add").hasAnyRole("ADMIN","EMPLOYEE")
                     .requestMatchers("/items").hasAnyRole("USER","ADMIN","EMPLOYEE")
-                    .requestMatchers("/admin").hasRole("ADMIN")
+                    .requestMatchers("/admin").hasAnyRole("ADMIN")
                     .anyRequest().permitAll()
                 .and()
                     .formLogin()
