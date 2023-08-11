@@ -87,6 +87,15 @@
         <p><strong>Search Name:</strong> <span th:text="${searchName}"></span></p>
         <p><strong>Search Brand:</strong> <span th:text="${searchBrand}"></span></p>
         <p><strong>Closest Distribution Center with Search Item: </strong><span th:text="${closestCenterWithItem.name}"></span></p>
+        <p>Enter the quantity to request the item from the closest distribution center:</p>
+        <form method="post" th:action="@{/admin/update}" id="request">
+            <!-- Use a hidden input field to pass the itemId -->
+            <input type="hidden" class="form-control" name="itemId" id="itemId" th:value="${itemId}"/>
+            <input type="hidden" class="form-control" name="selectItem" id="selectItem" th:value="${selectItem}"/>
+            <input type="number" class="form-control" name="quantity" id="quantity">
+            <br/>
+            <button type="submit" class="btn btn-primary">Request</button>
+        </form>
         <p><a href="#" th:href="@{/admin}">Clear Search</a></p>
     </div>
 

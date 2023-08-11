@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -71,13 +72,22 @@ public class AdminController {
 
         var warehouse = warehouseRepository.findById(1L);
         var closestCenterWithItem = itemRequestService.findClosestDistributionCenter(filteredCenters, warehouse.get().getLatitude(), warehouse.get().getLongitude());
+        Long itemId = closestCenterWithItem.getItems().stream().filter(item -> item.getName().equalsIgnoreCase(name)).findFirst().get().getId();
+        Item selectItem = closestCenterWithItem.getItems().stream().filter(item -> item.getName().equalsIgnoreCase(name)).findFirst().get();
 
+        model.addAttribute("itemId", itemId);
+        model.addAttribute("selectItem", selectItem);
         model.addAttribute("centers", filteredCenters);
         model.addAttribute("brands", EnumSet.allOf(Item.Brand.class));
         model.addAttribute("searchName", name);
         model.addAttribute("searchBrand", brand);
         model.addAttribute("closestCenterWithItem", closestCenterWithItem);
-
         return "admin";
+    }
+
+    @PostMapping("/update")
+    public String updateItem(@RequestParam Long itemId, Item selectItem, @RequestParam int quantity) {
+        itemRequestService.updateItem(itemId, selectItem, quantity);
+        return "redirect:/admin";
     }
 }

@@ -34,6 +34,7 @@ public class Item {
     @NotNull
     @DecimalMin(value = "1000", inclusive = false)
     private BigDecimal price;
+    @Min(0)
     private int quantity;
     public enum Brand {
         BALENCIAGA("Balenciaga"), STONEISLAND("Stone Island"), DIOR("Dior"), GUCCI("Gucci"), LOUISVUITTON("Louis Vuitton"), OFFWHITE("Off-White"), SUPREME("Supreme"), VERSACE("Versace");

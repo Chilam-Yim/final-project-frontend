@@ -1,12 +1,27 @@
 package FinalProject_frontend.service;
 
+import FinalProject_frontend.model.Item;
 import FinalProject_frontend.model.dto.DistributionCenterDto;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
 public class ItemRequestService {
+
+    private final RestTemplate restTemplate;
+
+    public ItemRequestService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+
+    public void updateItem(Long itemID, Item item, int quantity) {
+        String apiUrl = "http://localhost:8081/api/update/items/"+itemID+"/quantities="+quantity;
+        restTemplate.put(apiUrl, item);
+    }
 
 
     public DistributionCenterDto findClosestDistributionCenter(List<DistributionCenterDto> centers, double targetLatitude, double targetLongitude) {
@@ -22,6 +37,7 @@ public class ItemRequestService {
         }
         return closestCenter;
     }
+
 
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
         final int R = 6371;
